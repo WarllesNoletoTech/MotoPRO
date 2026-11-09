@@ -1,14 +1,23 @@
 @echo off
 setlocal
-set "ROOT=%~dp0"
-echo Instalando dependencias do backend...
-cd /d "%ROOT%backend"
+cd /d "%~dp0"
+if not exist "backend-MotoPRO\package.json" (
+ echo ERRO: backend-MotoPRO nao encontrado.
+ pause
+ exit /b 1
+)
+if not exist "frontend-MotoPRO\package.json" (
+ echo ERRO: frontend-MotoPRO nao encontrado.
+ pause
+ exit /b 1
+)
+echo Instalando dependencias dos dois projetos via npm workspaces...
 call npm install
-if errorlevel 1 (echo Falha ao instalar o backend.&pause&exit /b 1)
-echo Instalando dependencias do frontend...
-cd /d "%ROOT%frontend"
-call npm install
-if errorlevel 1 (echo Falha ao instalar o frontend.&pause&exit /b 1)
+if errorlevel 1 (
+ echo Falha na instalacao de dependencias.
+ pause
+ exit /b 1
+)
 echo.
-echo Dependencias instaladas. Configure os arquivos .env e .env.local.
+echo Instalacao concluida.
 pause

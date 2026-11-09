@@ -1,0 +1,21 @@
+{
+  "name": "motopro",
+  "version": "1.3.0",
+  "private": true,
+  "description": "MotoPRO - frontend e backend em pastas separadas; deploy Heroku pela raiz",
+  "workspaces": [
+    "backend-MotoPRO",
+    "frontend-MotoPRO"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend-MotoPRO",
+    "dev:frontend": "npm run dev --workspace=frontend-MotoPRO",
+    "build": "npm run build --workspace=backend-MotoPRO",
+    "start": "npm run start --workspace=backend-MotoPRO",
+    "typecheck:backend": "npm run typecheck --workspace=backend-MotoPRO",
+    "test:backend": "npm run test --workspace=backend-MotoPRO"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
