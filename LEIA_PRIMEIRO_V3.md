@@ -60,3 +60,6 @@ A rota `/app/admin` só funciona para usuário com `role='admin'` já autorizado
 ## Segurança
 
 As senhas e a JWT compartilhadas em conversas anteriores devem ser trocadas. Nenhuma credencial real foi incluída neste pacote. Não coloque `MP_ACCESS_TOKEN` no frontend ou em variáveis `NEXT_PUBLIC_*`.
+
+
+**Admin V3.1:** veja `LEIA_PRIMEIRO_ADMIN.md` para criar o primeiro administrador no Heroku.
