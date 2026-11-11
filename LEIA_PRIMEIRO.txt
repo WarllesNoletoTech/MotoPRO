@@ -10,8 +10,13 @@ Publicação:
 3. Faça Redeploy do frontend depois de definir a variável.
 4. No Heroku, APP_ORIGIN deve ser a origem HTTPS real da Vercel.
 5. Homologue assinaturas, Rappidex, login e cortesias.
-6. Execute npm ci, npm run typecheck e npm run build
-   em cada pasta antes de substituir a produção.
+6. O CI já verifica typecheck, testes e build nas duas pastas.
+7. Leia CHECKLIST_HOMOLOGACAO_FASE1.md antes de substituir produção.
+8. Para envio semanal por e-mail, configure RESEND_API_KEY e
+   REPORTS_FROM_EMAIL no Heroku e agende no Heroku Scheduler
+   o comando npm run reports:weekly (preferência diária 12h UTC).
+   O motoboy deve autorizar e confirmar seu e-mail.
+   Sem essas variáveis, relatórios manuais seguem funcionando.
 
 ATENÇÃO: o build do frontend agora funciona sem API_INTERNAL_URL,
 mas as rotas /api/* retornam 503 enquanto ela não for configurada.
