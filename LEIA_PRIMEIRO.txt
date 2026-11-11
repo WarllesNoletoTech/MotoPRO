@@ -1,19 +1,18 @@
-MotoPRO V2 - INSTALACAO NO WINDOWS
+MotoPRO - Fase 1 completa (frontend e backend)
+=================================================
+frontend-MotoPRO: Next.js 15, deploy na Vercel
+backend-MotoPRO: Node.js/Express, deploy no Heroku
 
-1) No MongoDB Atlas, altere a senha do usuario warllesb_db_user.
-   A senha anterior foi exposta em mensagens/capturas e nao foi colocada neste ZIP.
-2) Duplo clique em CONFIGURAR_WINDOWS.bat.
-   Digite a senha NOVA (entrada oculta). O programa cria backend/.env e
-   frontend/.env.local e gera uma JWT forte automaticamente no SEU computador.
-3) Duplo clique em INSTALAR_WINDOWS.bat (Node.js 22+ necessario).
-4) Duplo clique em VERIFICAR_CONEXAO_WINDOWS.bat para testar o MongoDB.
-5) Duplo clique em INICIAR_TUDO_WINDOWS.bat.
-6) Acesse http://localhost:3000 e teste o cadastro.
+Publicação:
+1. Publique o backend no Heroku e valide /api/health.
+2. Na Vercel, configure API_INTERNAL_URL com a ORIGEM HTTPS real
+   do backend, sem /api e sem barra final (Preview e Production).
+3. Faça Redeploy do frontend depois de definir a variável.
+4. No Heroku, APP_ORIGIN deve ser a origem HTTPS real da Vercel.
+5. Homologue assinaturas, Rappidex, login e cortesias.
+6. Execute npm ci, npm run typecheck e npm run build
+   em cada pasta antes de substituir a produção.
 
-API: http://localhost:4000/api/health
-
-Se o Atlas indicar hostname diferente do registrado no configurador,
-confirme em Atlas > Connect > Drivers e ajuste o campo $mongoHost
-em CONFIGURAR_WINDOWS.ps1.
-
-NUNCA envie prints do .env, nem publique o arquivo no Git.
+ATENÇÃO: o build do frontend agora funciona sem API_INTERNAL_URL,
+mas as rotas /api/* retornam 503 enquanto ela não for configurada.
+Não copie senhas, tokens nem .env de produção para este pacote.
