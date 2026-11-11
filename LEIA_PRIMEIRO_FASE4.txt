@@ -1,0 +1,46 @@
+MotoPRO 1.6.0 — FASE 4 COMPLETA
+=================================
+Este ZIP contém o frontend e backend completos, com as fases 1, 2, 3 e 4.
+
+O QUE HÁ DE NOVO
+- Despesas recorrentes: cadastrar, editar, pausar, reativar e excluir regras mensais.
+  Vencimentos 29/30/31 são ajustados ao último dia do mês.
+  Cada regra gera NO MÁXIMO um lançamento por competência, através de índice único MongoDB.
+  A sincronização ocorre ao abrir/voltar ao app com Premium válido e também por botão
+  “Conferir agora”. NÃO existe débito Pix automático nem cron de cobrança.
+  Os lançamentos gerados são despesas financeiras; não são pagamentos efetuados.
+  Se cadastrar uma regra com vencimento já passado no mês atual, pode ser criada
+  uma despesa imediatamente. Confira os valores antes de cadastrar.
+  Pausar/excluir regras NÃO apaga lançamentos de meses anteriores.
+  Não há retroatividade para meses em que o aplicativo não foi acessado.
+- Central de avisos dentro do aplicativo: entregas particulares pendentes,
+  manutenção prevista/vencida e despesas programadas para os próximos 7 dias.
+  NÃO envia push, SMS ou WhatsApp; requer acesso autenticado.
+- Produtividade financeira: total do mês, comparação com mês anterior,
+  detalhamento por categoria, dias com registros e médias por lançamento.
+  Não confunda lançamento de entrega com entrega individual; importações
+  podem representar mais de uma entrega.
+- Admin: indicadores agregados de regras recorrentes ativas e lançamentos recentes.
+
+IMPLANTAÇÃO RECOMENDADA
+1. Faça backup do MongoDB e preserve todas as variáveis de ambiente.
+2. Publique backend-MotoPRO no Heroku (Node 24); verifique /api/health.
+3. Confira os logs de startup: Entry.init() cria o índice único das recorrências,
+   e RecurringExpense.init() prepara a nova coleção.
+4. Configure API_INTERNAL_URL na Vercel com o HTTPS real do Heroku, sem /api.
+5. Publique frontend-MotoPRO na Vercel e abra em Preview/homologação.
+6. Teste os casos de CHECKLIST_HOMOLOGACAO_FASE4.md.
+7. Confirme em dispositivos Android (PWA) e contas diferentes antes da produção.
+
+COMANDOS LOCAIS
+cd backend-MotoPRO && npm ci && npm run typecheck && npm test && npm run build
+cd frontend-MotoPRO && npm ci && npm run typecheck && npm run build
+
+NÃO INCLUSO NO ZIP
+- Credenciais/arquivos .env privados, node_modules, dist, .next, .git.
+- Testes fim a fim reais com MongoDB, Mercado Pago, Rappidex e OpenAI.
+
+SEGURANÇA
+Todas as novas rotas exigem sessão autenticada e Premium.
+Cada consulta restringe os registros ao próprio usuário.
+No administrador são mostrados apenas totais agregados de recorrências.
