@@ -1,0 +1,55 @@
+MOTOPRO 1.5.0 — FASE 3 COMPLETA (FRONTEND + BACKEND)
+=======================================================
+
+PASTAS
+  backend-MotoPRO/  API Node.js/Express/MongoDB (Heroku)
+  frontend-MotoPRO/ Aplicativo Next.js PWA (Vercel)
+
+NOVIDADES
+  1. Clientes particulares: cadastro, edição, busca, arquivamento e exclusão definitiva quando sem histórico e anonimização dos contatos
+     quando houver histórico financeiro.
+  2. Entregas particulares: cadastro pendente, edição, exclusão e confirmação
+     de recebimento. O ganho só é contabilizado após confirmar o pagamento,
+     usando a data do recebimento, não a data da entrega.
+  3. Comparativo por plataforma: Rappidex importado, iFood, Uber, 99 e
+     outras plataformas quando informadas manualmente; entregas particulares.
+  4. Conquistas pessoais por critérios objetivos e campanhas administrativas.
+  5. Admin > Indicadores: atividade, retenção de coorte, assinantes pagantes,
+     cortesias, receita aprovada, projeção mensal teórica e uso de IA.
+  6. Exportação CSV e opção de salvar relatórios em PDF pela impressão
+     do navegador. Exportação JSON dos próprios dados ampliada.
+  7. Preservadas as funcionalidades e integrações das fases 1 e 2.
+
+PUBLICAR (ORDEM IMPORTANTE)
+  1. Faça backup do MongoDB antes de qualquer alteração de produção.
+  2. Atualize o repositório BACKEND com o CONTEÚDO de backend-MotoPRO/.
+  3. No Heroku, configure MONGODB_URI, JWT_SECRET (>=32 caracteres),
+     APP_ORIGIN=https://seu-frontend.vercel.app, e as variáveis existentes
+     de Mercado Pago/Rappidex/OpenAI sem alterá-las desnecessariamente.
+  4. Publique o backend, confira /api/health e os logs de inicialização.
+  5. Atualize o repositório FRONTEND com o CONTEÚDO de frontend-MotoPRO/.
+  6. Na Vercel, API_INTERNAL_URL deve ser a ORIGEM HTTPS do backend
+     (sem /api e sem barra final). A ausência NÃO quebra o build, mas
+     impede que as rotas da API funcionem (HTTP 503).
+  7. Publique o frontend e teste login, assinatura, Pix, Rappidex, scanner
+     de comprovantes, envio semanal, entregas particulares e admin.
+
+CUIDADOS
+  - O ZIP não inclui credenciais, .env, node_modules nem artefatos de build.
+  - Nenhum pagamento externo é realizado para clientes particulares.
+    'Recebi' apenas confirma um recebimento feito fora do aplicativo.
+  - Entregas já recebidas são bloqueadas contra edição/exclusão no Financeiro
+    para evitar divergência e duplicidade; corrija inconsistências via suporte.
+  - iFood e outras plataformas na tela de comparativo são etiquetas MANUAIS,
+    não uma integração oficial de recebimentos. Apenas a origem Rappidex
+    preexistente gera importações quando a sincronização está configurada.
+  - PDF utiliza a função de imprimir/salvar PDF do navegador.
+  - Projeção de receita do admin não é valor garantido de cobrança futura.
+  - Conquistas são reconhecimento pessoal, não sorteio nem promessa de prêmio.
+  - O módulo antigo de campanhas continua exigindo critérios objetivos e
+    aprovação administrativa; não cria sorteios.
+  - Antes de produção, revise política de privacidade, LGPD e consentimentos,
+    inclusive para telefones de clientes particulares.
+  - Não inclua .git, node_modules, .env ou senhas em uploads públicos.
+
+VERIFIQUE: CHECKLIST_HOMOLOGACAO_FASE3.md
