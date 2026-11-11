@@ -1,0 +1,45 @@
+MotoPRO v1.4.0 — FASE 2 COMPLETA (código de homologação)
+=======================================================
+
+PASTAS
+  backend-MotoPRO/    API Express/Node.js + MongoDB para Heroku
+  frontend-MotoPRO/   PWA Next.js para Vercel
+
+O QUE FOI INCLUÍDO
+  1) Assistente de voz com revisão opcional usando dois modelos de transcrição.
+     Continua com gravação de até 10 segundos e confirmação manual de valores.
+  2) Leitura de comprovantes via IA, com edição e confirmação antes de registrar.
+     Fotos não são guardadas; existe limite de 12 leituras/hora por conta.
+     Um mesmo comprovante não cria dois lançamentos.
+  3) Planos de manutenção preventiva por tempo/quilometragem (Minha Moto).
+     Você define o intervalo com base no manual de sua motocicleta.
+  4) Conciliação por dia entre ganhos manuais e importações do Rappidex;
+     identifica possíveis duplicidades, sem exclusão automática.
+  5) Indicadores de uso de IA em Admin > Sistema; sem gravação de áudios ou fotos.
+     Custos só são estimados se as taxas reais forem configuradas.
+
+COMO PUBLICAR
+  1. Heroku: publicar backend-MotoPRO primeiro e configurar MONGODB_URI,
+     JWT_SECRET, APP_ORIGIN=https://DOMINIO-REAL-DA-VERCEL e OPENAI_API_KEY.
+  2. Heroku opcional: OPENAI_RECEIPT_MODEL=gpt-4o-mini; OPENAI_COMMAND_MODEL;
+     OPENAI_TRANSCRIPTION_MODEL (usar modelos com permissão na sua conta OpenAI).
+  3. Vercel: publicar frontend-MotoPRO. Configure API_INTERNAL_URL=https://
+     ENDERECO-REAL-DO-HEROKU sem /api e sem barra final. Faça REDEPLOY.
+  4. Validar que https://SEU-FRONTEND/api/health responde status ok.
+  5. Testar em homologação antes de substituir produção, inclusive Rappidex,
+     Mercado Pago, cortesias, pagamentos e autorização Premium.
+  6. Configuração opcional de custos (somente se souber as taxas reais da API):
+     OPENAI_INPUT_USD_PER_1M e OPENAI_OUTPUT_USD_PER_1M.
+
+IMPORTANTES LIMITES
+  - Este pacote é código-fonte e NÃO contém credenciais ou dados privados.
+  - O código foi compilado e passou nos testes locais; não inclui deploy,
+    validação de banco de produção nem chamadas reais à OpenAI ou Rappidex.
+  - A segunda transcrição usa outra chamada à API e pode aumentar custo.
+  - A manutenção gera alertas visíveis no aplicativo; não envia push em segundo
+    plano, e não substitui revisão mecânica nem orientações do fabricante.
+  - A conciliação usa importações JÁ REGISTRADAS no MotoPRO, não transações
+    bancárias e não importa Rappidex automaticamente nesta tela.
+  - Proteja .env, JWT, tokens Mercado Pago/Resend/Rappidex e senhas.
+
+LEIA TAMBÉM: CHECKLIST_HOMOLOGACAO_FASE2.md
